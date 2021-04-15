@@ -1,7 +1,7 @@
 node-web-scraper
 ================
 
-Simple web scraper to get a movie name, release year and community rating from IMDB.
+Simple web scraper to get a quotes from the website azquotes.com
 To run this example use the following commands:
 
 ``` shell
