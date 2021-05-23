@@ -9,7 +9,8 @@
     "url": "https://github.com/scotch-io/node-web-scraper"
   },
   "dependencies": {
-    "request": "latest",
-    "cheerio": "latest"
+    "cheerio": "latest",
+    "fs-extra": "^10.0.0",
+    "request": "latest"
   }
 }
