@@ -1,10 +1,9 @@
 var request = require('request');
-var fs = require('fs');
+var fse = require('fs-extra');
 var cheerio = require('cheerio');
+const { PHILOSOPHERS_DATA } = require('../constants/constants');
 
-
-
-module.exports.requestURL = (url) => {
+module.exports.requestURL = (url, philosopherIndex) => {
     return new Promise((resolve, reject) => {
 
         request(url, function (error, response, html) {
@@ -13,8 +12,9 @@ module.exports.requestURL = (url) => {
                 var $ = cheerio.load(html);
 
                 var json = [];
-
-                $('[data-author=\"Friedrich Nietzsche\"]').each(function (i, elem) {
+                // $('[data-author=\"Friedrich Nietzsche\"]').each(function (i, elem) {
+                // $('[data-author=\"Arthur Schopenhauer\"]').each(function (i, elem) {
+                $('[data-author=\"' + PHILOSOPHERS_DATA[philosopherIndex].philosopherNameInSelector + '\"]').each(function (i, elem) {
                     json[i] = $(this).text();
                 });
                 resolve(json);
@@ -25,8 +25,12 @@ module.exports.requestURL = (url) => {
 
 }
 
-module.exports.writeToFile = (json, suffix) => {
-    return fs.writeFile(`output_${suffix}.json`, JSON.stringify(json, null, 4), function (err) {
-        console.log('File successfully written! - Check your project directory for the output.json file');
+module.exports.writeToFile = (json, suffix, philosopherNameInSelector) => {
+    return fse.outputFile(`output/${philosopherNameInSelector}/output_${suffix}.json`, JSON.stringify(json, null, 4), err => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`The file output_${suffix}.json was saved!`);
+        }
     })
 }
