@@ -24,7 +24,7 @@ module.exports.requestURL = (url, philosopherIndex) => {
 }
 
 module.exports.writeToFile = (json, suffix, philosopherNameInSelector) => {
-    return fse.outputFile(`output/${philosopherNameInSelector}/output_${suffix}.json`, JSON.stringify(json, null, 4), err => {
+    return fse.outputFile(`output/${philosopherNameInSelector}/output_${suffix}.js`, JSON.stringify(json, null, 4), err => {
         if (err) {
             console.log(err);
         } else {
