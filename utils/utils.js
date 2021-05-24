@@ -12,8 +12,6 @@ module.exports.requestURL = (url, philosopherIndex) => {
                 var $ = cheerio.load(html);
 
                 var json = [];
-                // $('[data-author=\"Friedrich Nietzsche\"]').each(function (i, elem) {
-                // $('[data-author=\"Arthur Schopenhauer\"]').each(function (i, elem) {
                 $('[data-author=\"' + PHILOSOPHERS_DATA[philosopherIndex].philosopherNameInSelector + '\"]').each(function (i, elem) {
                     json[i] = $(this).text();
                 });
