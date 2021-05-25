@@ -1,26 +1,62 @@
 var request = require('request');
 var fse = require('fs-extra');
 var cheerio = require('cheerio');
-const { PHILOSOPHERS_DATA } = require('../constants/constants');
 
-module.exports.requestURL = (url, philosopherIndex) => {
+module.exports.requestURL = (url, philosopherNameInSelector) => {
     return new Promise((resolve, reject) => {
 
         request(url, function (error, response, html) {
+            if (error) {
+                console.log(error);
+                reject(error)
+            }
+
+            let json = [];
+
             console.log(url);
+
             if (!error) {
                 var $ = cheerio.load(html);
 
-                var json = [];
-                $('[data-author=\"' + PHILOSOPHERS_DATA[philosopherIndex].philosopherNameInSelector + '\"]').each(function (i, elem) {
+
+                $('[data-author=\"' + philosopherNameInSelector + '\"]').each(function (i, elem) {
                     json[i] = $(this).text();
                 });
+
+                console.log("json.length", json.length)
+
                 resolve(json);
+
             }
 
         })
     });
 
+}
+
+module.exports.findOutLastPage = (url) => {
+    url = url + "?p=10000000";
+    return new Promise((resolve, reject) => {
+        request(url, function (error, response, html) {
+
+            console.log(url);
+
+            if (!error) {
+                var $ = cheerio.load(html);
+
+                let lastRead = $('#fly-scroll-container > div.leftcol.quotations > div > h1').text().trim().split(" ");
+                const philosopherNameInSelector = $('.author').first().text().trim()
+
+                console.log(lastRead);
+
+                lastRead = lastRead[lastRead.length - 1];
+
+                resolve({ lastRead, philosopherNameInSelector });
+
+            }
+
+        })
+    });
 }
 
 module.exports.writeToFile = (json, suffix, philosopherNameInSelector) => {
@@ -32,3 +68,4 @@ module.exports.writeToFile = (json, suffix, philosopherNameInSelector) => {
         }
     })
 }
+
