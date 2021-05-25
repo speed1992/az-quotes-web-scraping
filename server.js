@@ -22,7 +22,7 @@ const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
     }
 
-    writeToFile(quotesCollection, i, philosopherNameInSelector);
+    writeToFile(quotesCollection,philosopherNameInSelector);
 
   }
 

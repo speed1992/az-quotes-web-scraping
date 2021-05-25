@@ -59,12 +59,12 @@ module.exports.findOutLastPage = (url) => {
     });
 }
 
-module.exports.writeToFile = (json, suffix, philosopherNameInSelector) => {
-    return fse.outputFile(`output/${philosopherNameInSelector}/output_${suffix}.js`, JSON.stringify(json, null, 4), err => {
+module.exports.writeToFile = (json, philosopherNameInSelector) => {
+    return fse.outputFile(`output/${philosopherNameInSelector}/output.js`, JSON.stringify(json, null, 4), err => {
         if (err) {
             console.log(err);
         } else {
-            console.log(`The file output_${suffix}.json was saved!`);
+            console.log(`The file output.js was saved!`);
         }
     })
 }
