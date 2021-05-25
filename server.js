@@ -10,7 +10,7 @@ const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
     let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j]);
 
-    for (i = 1; i <= 5; i++) {
+    for (i = 1; i <= lastPage; i++) {
 
       console.log(i);
 
