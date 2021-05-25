@@ -1,5 +1,5 @@
 const { PHILOSOPHERS_DATA } = require('./constants/constants');
-const { requestURL, writeToFile } = require('./utils/utils');
+const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
 (async function () {
 
@@ -8,17 +8,21 @@ const { requestURL, writeToFile } = require('./utils/utils');
 
   for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
 
-    for (i = 1; i <= PHILOSOPHERS_DATA[j].lastPage; i++) {
+    let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j]);
+
+    for (i = 1; i <= lastPage; i++) {
 
       console.log(i);
 
-      const json = await requestURL(PHILOSOPHERS_DATA[j].URL + "?p=" + i, j);
+      const urlWithPageNumber = PHILOSOPHERS_DATA[j] + "?p=" + i
+
+      const json = await requestURL(urlWithPageNumber, philosopherNameInSelector);
 
       quotesCollection = [...quotesCollection, ...json]
 
     }
 
-    writeToFile(quotesCollection, i, PHILOSOPHERS_DATA[j].philosopherNameInSelector);
+    writeToFile(quotesCollection, i, philosopherNameInSelector);
 
   }
 
