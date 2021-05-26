@@ -44,14 +44,14 @@ module.exports.findOutLastPage = (url) => {
             if (!error) {
                 var $ = cheerio.load(html);
 
-                let lastRead = $('#fly-scroll-container > div.leftcol.quotations > div > h1').text().trim().split(" ");
+                let lastPage = $('#fly-scroll-container > div.leftcol.quotations > div > h1').text().trim().split(" ");
                 const philosopherNameInSelector = $('.author').first().text().trim()
 
-                console.log(lastRead);
+                console.log(lastPage);
 
-                lastRead = lastRead[lastRead.length - 1];
+                lastPage = lastPage[lastPage.length - 1];
 
-                resolve({ lastRead, philosopherNameInSelector });
+                resolve({ lastPage, philosopherNameInSelector });
 
             }
 
