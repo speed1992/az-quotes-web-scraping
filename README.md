@@ -1,4 +1,4 @@
-node-web-scraper
+Web-scraper
 ================
 
 Simple web scraper to get a quotes from the website azquotes.com
