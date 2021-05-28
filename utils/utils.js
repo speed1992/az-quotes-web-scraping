@@ -60,7 +60,7 @@ module.exports.findOutLastPage = (url) => {
 }
 
 module.exports.writeToFile = (json, philosopherNameInSelector) => {
-    return fse.outputFile(`output/${philosopherNameInSelector}/output.js`, JSON.stringify(json, null, 4), err => {
+    return fse.outputFile(`output/${philosopherNameInSelector}/${philosopherNameInSelector.toLowerCase()}.js`, JSON.stringify(json, null, 4), err => {
         if (err) {
             console.log(err);
         } else {
