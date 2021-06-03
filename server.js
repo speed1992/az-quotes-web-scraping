@@ -8,13 +8,13 @@ const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
   for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
 
-    let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j]);
+    let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].url);
 
     for (i = 1; i <= lastPage; i++) {
 
       console.log(i);
 
-      const urlWithPageNumber = PHILOSOPHERS_DATA[j] + "?p=" + i
+      const urlWithPageNumber = PHILOSOPHERS_DATA[j].url + "?p=" + i
 
       const json = await requestURL(urlWithPageNumber, philosopherNameInSelector);
 
@@ -22,7 +22,7 @@ const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
     }
 
-    writeToFile(quotesCollection,philosopherNameInSelector);
+    writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName });
 
   }
 

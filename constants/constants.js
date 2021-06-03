@@ -1,3 +1,6 @@
 module.exports.PHILOSOPHERS_DATA = [
-    "https://www.azquotes.com/author/4490-Ralph_Waldo_Emerson",
+    { url: "https://www.azquotes.com/author/2957-Carl_von_Clausewitz", varName: "CLAUSEWITZ" }
 ]
+
+module.exports.STATIC_SUBSTRING1 = "export const "
+module.exports.STATIC_SUBSTRING2 = " = "
