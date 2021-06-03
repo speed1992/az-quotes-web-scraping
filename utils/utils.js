@@ -1,6 +1,7 @@
 var request = require('request');
 var fse = require('fs-extra');
 var cheerio = require('cheerio');
+const { STATIC_SUBSTRING1, STATIC_SUBSTRING2 } = require('../constants/constants');
 
 module.exports.requestURL = (url, philosopherNameInSelector) => {
     return new Promise((resolve, reject) => {
@@ -59,8 +60,11 @@ module.exports.findOutLastPage = (url) => {
     });
 }
 
-module.exports.writeToFile = (json, philosopherNameInSelector) => {
-    return fse.outputFile(`output/${philosopherNameInSelector}/${philosopherNameInSelector.toLowerCase()}.js`, JSON.stringify(json, null, 4), err => {
+module.exports.writeToFile = (json, { philosopherNameInSelector, varName }) => {
+    const outputPath = `output/${philosopherNameInSelector}/${philosopherNameInSelector.toLowerCase()}.js`
+    const content = `${STATIC_SUBSTRING1}${varName}${STATIC_SUBSTRING2}${JSON.stringify(json, null, 4)}`
+
+    return fse.outputFile(outputPath, content, err => {
         if (err) {
             console.log(err);
         } else {
