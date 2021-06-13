@@ -12,7 +12,7 @@ const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
     for (i = 1; i <= lastPage; i++) {
 
-      console.log(i);
+      console.log("Page No. ", i);
 
       const urlWithPageNumber = PHILOSOPHERS_DATA[j].url + "?p=" + i
 
