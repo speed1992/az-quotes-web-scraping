@@ -1,7 +1,7 @@
 var request = require('request');
 var fse = require('fs-extra');
 var cheerio = require('cheerio');
-const { STATIC_SUBSTRING1, STATIC_SUBSTRING2 } = require('../constants/constants');
+const { STATIC_SUBSTRING1, STATIC_SUBSTRING2, PHILOSOPHERS_DATA } = require('../../constants/constants');
 
 module.exports.requestURL = (url, philosopherNameInSelector) => {
     return new Promise((resolve, reject) => {
@@ -20,8 +20,15 @@ module.exports.requestURL = (url, philosopherNameInSelector) => {
                 var $ = cheerio.load(html);
 
 
-                $('[data-author=\"' + philosopherNameInSelector + '\"]').each(function (i, elem) {
-                    json[i] = $(this).text();
+                $('.quoteText').each(function (i, elem) {
+                    try {
+                        var str = $(this).text().trim().split("\n")[0]
+                        str = str.replace("“", "");
+                        str = str.replace("”", "");
+                        json[i] = str.trim();
+
+                    } catch { }
+
                 });
 
                 console.log("Response length", json.length)
@@ -36,7 +43,6 @@ module.exports.requestURL = (url, philosopherNameInSelector) => {
 }
 
 module.exports.findOutLastPage = (url) => {
-    url = url + "?p=10000000";
     return new Promise((resolve, reject) => {
         request(url, function (error, response, html) {
 
@@ -45,12 +51,12 @@ module.exports.findOutLastPage = (url) => {
             if (!error) {
                 var $ = cheerio.load(html);
 
-                let lastPage = $('#fly-scroll-container > div.leftcol.quotations > div > h1').text().trim().split(" ");
-                const philosopherNameInSelector = $('.author').first().text().trim()
+                let lastPage = $('body > div.content > div.mainContentContainer > div.mainContent > div.mainContentFloat > div.leftContainer > div > div:nth-child(33) > div :nth-last-child(2)').text().trim();
 
-                console.log(lastPage);
+                const philosopherNameInSelector = $('.leftContainer h1').text().trim().split("\n")[0]
 
-                lastPage = lastPage[lastPage.length - 1];
+                console.log(philosopherNameInSelector);
+                console.log("Last Page", lastPage);
 
                 resolve({ lastPage, philosopherNameInSelector });
 
@@ -72,5 +78,23 @@ module.exports.writeToFile = (json, { philosopherNameInSelector, varName }) => {
             console.log(`The file ${philosopher} was saved!`);
         }
     })
+}
+
+
+function goodreads() {
+    document.querySelectorAll(".quoteText").forEach((selector, index) => {
+
+        try {
+
+            var str = selector.textContent.trim().split("\n")[0]
+            str = str.replace("“", "");
+            str = str.replace("”", "");
+            console.log(str.trim())
+
+        } catch { }
+
+    })
+
+
 }
 
