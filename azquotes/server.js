@@ -1,30 +1,30 @@
 const { PHILOSOPHERS_DATA } = require('../constants/constants');
 const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
-(async function () {
+module.exports.start = async function () {
 
-  console.log('App started');
+  return new Promise(function (resolve, _) {
 
-  for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
+    console.log('AZ-Quotes App started');
 
-    let quotesCollection = []
+    for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
 
-    let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].url);
+      let quotesCollection = []
 
-    for (i = 1; i <= lastPage; i++) {
+      let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].azQuotesUrl);
 
-      console.log("Page No.", i);
+      for (i = 1; i <= lastPage; i++) {
+        console.log("Page No.", i);
+        const urlWithPageNumber = PHILOSOPHERS_DATA[j].azQuotesUrl + "?p=" + i
+        const json = await requestURL(urlWithPageNumber, philosopherNameInSelector);
+        quotesCollection = [...quotesCollection, ...json]
+      }
 
-      const urlWithPageNumber = PHILOSOPHERS_DATA[j].url + "?p=" + i
+      writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName });
 
-      const json = await requestURL(urlWithPageNumber, philosopherNameInSelector);
-
-      quotesCollection = [...quotesCollection, ...json]
-
+      resolve();
     }
 
-    writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName });
+  });
 
-  }
-
-})();
+};
