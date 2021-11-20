@@ -1,6 +1,6 @@
 module.exports.PHILOSOPHERS_DATA = [
     {
-        url: "https://www.azquotes.com/author/6758-Adolf_Hitler",
+        azQuotesUrl: "https://www.azquotes.com/author/1105-Simone_de_Beauvoir",
         goodreadsURL: "https://www.goodreads.com/author/quotes/30691.Adolf_Hitler",
         varName: "HITLER"
     }

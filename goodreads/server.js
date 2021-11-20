@@ -1,30 +1,26 @@
 const { PHILOSOPHERS_DATA } = require('../constants/constants');
 const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
 
-(async function () {
+module.exports.start = async function () {
+  return new Promise(function (resolve, _) {
 
-  console.log('App started');
+    console.log('Goodreads App started');
 
-  for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
+    for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
 
-    let quotesCollection = []
+      let quotesCollection = []
+      let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].goodreadsURL);
 
-    let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].goodreadsURL);
+      for (i = 1; i <= lastPage; i++) {
+        console.log("Page No.", i);
+        const urlWithPageNumber = PHILOSOPHERS_DATA[j].goodreadsURL + "?page=" + i
+        const json = await requestURL(urlWithPageNumber, philosopherNameInSelector);
+        quotesCollection = [...quotesCollection, ...json]
+      }
 
-    for (i = 1; i <= lastPage; i++) {
+      writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName });
 
-      console.log("Page No.", i);
-
-      const urlWithPageNumber = PHILOSOPHERS_DATA[j].goodreadsURL + "?page=" + i
-
-      const json = await requestURL(urlWithPageNumber, philosopherNameInSelector);
-
-      quotesCollection = [...quotesCollection, ...json]
-
+      resolve();
     }
-
-    writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName });
-
-  }
-
-})();
+  });
+};
