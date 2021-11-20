@@ -3,6 +3,8 @@
 
     console.log("String similarity process started.");
 
+    // combine output
+
     // take input from inputs folder
 
     // store the location of the file for writing output on the end stage

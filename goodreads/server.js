@@ -1,8 +1,11 @@
-const { PHILOSOPHERS_DATA } = require('../constants/constants');
-const { requestURL, writeToFile, findOutLastPage } = require('./utils/utils');
+const { PHILOSOPHERS_DATA } = require('../common/constants/constants');
+const { writeToFile } = require('../common/utils/utils');
+const { MODULE_NAME } = require('./constants/constants');
+const { requestURL, findOutLastPage } = require('./utils/utils');
 
-module.exports.start = async function () {
-  return new Promise(function (resolve, _) {
+module.exports.start = function () {
+
+  return new Promise(async function (resolve, _) {
 
     console.log('Goodreads App started');
 
@@ -18,7 +21,7 @@ module.exports.start = async function () {
         quotesCollection = [...quotesCollection, ...json]
       }
 
-      writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName });
+      writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName }, MODULE_NAME);
 
       resolve();
     }

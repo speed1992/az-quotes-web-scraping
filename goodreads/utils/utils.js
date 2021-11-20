@@ -1,7 +1,7 @@
 var request = require('request');
 var fse = require('fs-extra');
 var cheerio = require('cheerio');
-const { STATIC_SUBSTRING1, STATIC_SUBSTRING2, PHILOSOPHERS_DATA } = require('../../constants/constants');
+const { STATIC_SUBSTRING1, STATIC_SUBSTRING2, PHILOSOPHERS_DATA } = require('../../common/constants/constants');
 
 module.exports.requestURL = (url, philosopherNameInSelector) => {
     return new Promise((resolve, reject) => {
@@ -65,21 +65,6 @@ module.exports.findOutLastPage = (url) => {
         })
     });
 }
-
-module.exports.writeToFile = (json, { philosopherNameInSelector, varName }) => {
-    const philosopher = `${philosopherNameInSelector}/${philosopherNameInSelector.toLowerCase()}.js`
-    const outputPath = `output/${philosopher}`
-    const content = `${STATIC_SUBSTRING1}${varName}${STATIC_SUBSTRING2}${JSON.stringify(json, null, 4)}`
-
-    return fse.outputFile(outputPath, content, err => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(`The file ${philosopher} was saved!`);
-        }
-    })
-}
-
 
 function goodreads() {
     document.querySelectorAll(".quoteText").forEach((selector, index) => {
