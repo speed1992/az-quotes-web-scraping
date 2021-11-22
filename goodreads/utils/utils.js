@@ -65,21 +65,3 @@ module.exports.findOutLastPage = (url) => {
         })
     });
 }
-
-function goodreads() {
-    document.querySelectorAll(".quoteText").forEach((selector, index) => {
-
-        try {
-
-            var str = selector.textContent.trim().split("\n")[0]
-            str = str.replace("“", "");
-            str = str.replace("”", "");
-            console.log(str.trim())
-
-        } catch { }
-
-    })
-
-
-}
-
