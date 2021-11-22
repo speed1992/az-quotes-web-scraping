@@ -12,7 +12,7 @@ const writeToFile = (json, { philosopherNameInSelector = null, varName }, MODULE
     else
         content = `${JSON.stringify(json, null, 4)}`
 
-    return fse.outputFile(outputPath, content, err => {
+    return fse.outputFileSync(outputPath, content, err => {
         if (err) {
             console.log(err);
         } else {

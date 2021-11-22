@@ -18,6 +18,7 @@ const printDistance = (str1, str2, distance) => {
 
 
 function compare(arr, disimilarityCoffecient = 5) {
+    console.log("reaching")
     var removalCounter = 0;
 
     for (var i = 0; i < arr.length; i++) {

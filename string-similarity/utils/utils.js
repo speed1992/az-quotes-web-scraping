@@ -1,43 +1,61 @@
 const fse = require('fs-extra')
-const klaw = require('klaw')
+const klawSync = require('klaw-sync')
 const through2 = require('through2')
 const path = require("path");
+const { compare } = require('./levAlgoUtils');
 
 let inputPath = "../../combine-output/output";
 
 inputPath = path.resolve(__dirname, inputPath);
 
-let outputPath = "../output";
+let outputPath = "../input";
 
 outputPath = path.resolve(__dirname, outputPath)
 
-function getAllFiles() {
+const parseOutput = (data) => JSON.parse(data);
 
-    const excludeDirFilter = through2.obj(function (item, enc, next) {
-        if (!item.stats.isDirectory()) this.push(item)
-        next()
+function callback(err, data) {
+    if (err) console.log(err);
+    return data;
+}
+
+function getAllFiles(dirPath) {
+    const result = klawSync(dirPath, { nodir: true })
+
+    return result.map((value) => {
+        return value.path
     })
-
-    const items = [] // files, directories, symlinks, etc
-
-    klaw(inputPath)
-        .pipe(excludeDirFilter)
-        .on('data', item => items.push(item.path))
-        .on('end', () => console.dir(items)) // => [ ... array of files without directories]
-
-    return items;
 }
 
 function copyFilesIntoInputFolder() {
-    const fileNames = getAllFiles();
-
+    const fileNames = getAllFiles(inputPath);
     fileNames.forEach((value) => {
         fse.copy(value, `${outputPath}/${path.basename(value)}`)
-            .then(() => console.log(path.basename(value), 'success!'))
+            .then(() => console.log(path.basename(value), 'copied!'))
             .catch(err => console.error(err))
+    })
+
+
+}
+
+function removeSimilarQuotes() {
+    const fileNames = getAllFiles(outputPath);
+
+    fileNames.forEach((filePath) => {
+        console.log(filePath)
+        let quotes;
+
+        let output = fse.readFileSync(filePath, "utf8", callback)
+
+        if (output != undefined && output)
+            quotes = parseOutput(output);
+
+        compare(quotes);
+
     })
 
 }
 
+module.exports.removeSimilarQuotes = removeSimilarQuotes;
 module.exports.copyFilesIntoInputFolder = copyFilesIntoInputFolder;
 module.exports.getAllFiles = getAllFiles;
