@@ -19,26 +19,30 @@ const parseOutput = (data) => JSON.parse(data);
 
 function readFileFromAllModules() {
 
-    for (let i = 0; i < PHILOSOPHERS_DATA.length; i++) {
-        const varName = PHILOSOPHERS_DATA[i].varName;
-        let combinedOutput = [];
+    return new Promise(function (resolve, _) {
 
-        for (let j = 0; j < modules.length; j++) {
+        for (let i = 0; i < PHILOSOPHERS_DATA.length; i++) {
+            const varName = PHILOSOPHERS_DATA[i].varName;
+            let combinedOutput = [];
 
-            const inputPath = `../../${modules[j]}/output/${varName}.js`
+            for (let j = 0; j < modules.length; j++) {
 
-            let output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
+                const inputPath = `../../${modules[j]}/output/${varName}.js`
 
-            console.log("output:", output);
+                let output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
 
-            if (output != undefined && output)
-                combinedOutput = [...combinedOutput, ...(parseOutput(output))];
+                console.log("output:", output);
+
+                if (output != undefined && output)
+                    combinedOutput = [...combinedOutput, ...(parseOutput(output))];
+
+            }
+
+            writeToFile(combinedOutput, { philosopherNameInSelector: "", varName }, "combine-output", true)
 
         }
 
-        writeToFile(combinedOutput, { philosopherNameInSelector: "", varName }, "combine-output", true)
-
-    }
+    });
 
 }
 

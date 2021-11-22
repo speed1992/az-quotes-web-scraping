@@ -5,6 +5,7 @@
   "dependencies": {
     "cheerio": "latest",
     "fs-extra": "^10.0.0",
+    "klaw": "^4.0.1",
     "request": "latest"
   }
 }
