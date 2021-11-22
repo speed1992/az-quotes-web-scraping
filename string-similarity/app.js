@@ -1,9 +1,10 @@
-(function(){
+
+console.log("String similarity process started.");
 
 
-    console.log("String similarity process started.");
 
-    // combine output
+
+    // combine output - done
 
     // take input from inputs folder
 
@@ -15,5 +16,3 @@
 
     // write to the same file
 
-
-})();
