@@ -17,8 +17,8 @@ function callback(err, data) {
 const parseOutput = (data) => JSON.parse(data);
 
 function readFileFromAllModules() {
-
     return new Promise(function (resolve, _) {
+        console.log("Combining process started.")
 
         for (let i = 0; i < PHILOSOPHERS_DATA.length; i++) {
             const varName = PHILOSOPHERS_DATA[i].varName;
@@ -34,7 +34,7 @@ function readFileFromAllModules() {
 
             }
 
-            writeToFile(combinedOutput, { varName }, "combine-output", true)
+            writeToFile(combinedOutput, { varName }, "combine-output")
 
         }
 

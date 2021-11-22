@@ -1,8 +1,12 @@
-const { copyFilesIntoInputFolder } = require("./utils/utils");
+const { copyFilesIntoInputFolder, removeSimilarQuotes } = require("./utils/utils");
 
-console.log("String similarity process started.");
+function start() {
+    console.log("String similarity process started.");
 
-copyFilesIntoInputFolder();
+    copyFilesIntoInputFolder();
+    removeSimilarQuotes();
+
+}
 
 
 // find disimilarities 
@@ -11,5 +15,4 @@ copyFilesIntoInputFolder();
 
 // write to the same 
 
-
-module.start = copyFilesIntoInputFolder;
+module.exports.start = start;
