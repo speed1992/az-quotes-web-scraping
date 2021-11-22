@@ -5,7 +5,9 @@
   "dependencies": {
     "cheerio": "latest",
     "fs-extra": "^10.0.0",
+    "js-levenshtein": "^1.1.6",
     "klaw": "^4.0.1",
-    "request": "latest"
+    "request": "latest",
+    "through2": "^4.0.2"
   }
 }

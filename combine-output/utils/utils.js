@@ -16,7 +16,6 @@ function callback(err, data) {
 
 const parseOutput = (data) => JSON.parse(data);
 
-
 function readFileFromAllModules() {
 
     return new Promise(function (resolve, _) {
@@ -28,17 +27,14 @@ function readFileFromAllModules() {
             for (let j = 0; j < modules.length; j++) {
 
                 const inputPath = `../../${modules[j]}/output/${varName}.js`
-
                 let output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
-
-                console.log("output:", output);
 
                 if (output != undefined && output)
                     combinedOutput = [...combinedOutput, ...(parseOutput(output))];
 
             }
 
-            writeToFile(combinedOutput, { philosopherNameInSelector: "", varName }, "combine-output", true)
+            writeToFile(combinedOutput, { varName }, "combine-output", true)
 
         }
 

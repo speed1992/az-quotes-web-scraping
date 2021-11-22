@@ -1,18 +1,15 @@
+const { copyFilesIntoInputFolder } = require("./utils/utils");
 
 console.log("String similarity process started.");
 
+copyFilesIntoInputFolder();
 
 
+// find disimilarities 
 
-    // combine output - done
+// remove disimilarities
 
-    // take input from inputs folder
+// write to the same 
 
-    // store the location of the file for writing output on the end stage
 
-    // find disimilarities 
-
-    // remove disimilarities
-
-    // write to the same file
-
+module.start = copyFilesIntoInputFolder;
