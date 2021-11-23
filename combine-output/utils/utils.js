@@ -28,7 +28,7 @@ function readFileFromAllModules() {
                 const inputPath = `../../${modules[j]}/output/${varName}.js`
                 let output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
 
-                if (output != undefined && output)
+                if (typeof output != undefined && output)
                     combinedOutput = [...combinedOutput, ...(parseOutput(output))];
 
             }
