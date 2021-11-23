@@ -11,7 +11,6 @@ module.exports.start = function () {
 
     for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
       if (PHILOSOPHERS_DATA[j].azQuotesURL && PHILOSOPHERS_DATA[j].azQuotesURL != "" && typeof PHILOSOPHERS_DATA[j].azQuotesURL !== undefined) {
-
         let quotesCollection = []
 
         let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].azQuotesURL);
@@ -26,7 +25,7 @@ module.exports.start = function () {
         writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName }, MODULE_NAME);
       }
 
-      resolve();
+      if (j === PHILOSOPHERS_DATA.length - 1) resolve();
     }
 
   });

@@ -14,11 +14,11 @@ const { start: pullQuotesFromGoodreads } = require("./goodreads/app");
 })();
 
 
-// function errorHandler(error) {
-//     console.log(error);
-// }
+function errorHandler(error) {
+    console.log(error);
+}
 
-// process.on('uncaughtException', errorHandler)
-// process.on('unhandledRejection', errorHandler)
-// process.on('SIGTERM', errorHandler)
-// process.on('SIGINT', errorHandler)
+process.on('uncaughtException', errorHandler)
+process.on('unhandledRejection', errorHandler)
+process.on('SIGTERM', errorHandler)
+process.on('SIGINT', errorHandler)

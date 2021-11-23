@@ -10,6 +10,8 @@ module.exports.start = function () {
     console.log('Goodreads App started');
 
     for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
+      console.log("*************************************************why", PHILOSOPHERS_DATA[j].goodreadsURL)
+
       if (PHILOSOPHERS_DATA[j].goodreadsURL && PHILOSOPHERS_DATA[j].goodreadsURL != "" && typeof PHILOSOPHERS_DATA[j].goodreadsURL !== undefined) {
 
         let quotesCollection = []
@@ -24,7 +26,7 @@ module.exports.start = function () {
 
         writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName }, MODULE_NAME);
       }
-      resolve();
+      if (j === PHILOSOPHERS_DATA.length - 1) resolve();
     }
   });
 };
