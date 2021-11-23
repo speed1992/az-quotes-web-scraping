@@ -1,4 +1,5 @@
 const levenshtein = require("js-levenshtein");
+const { writeToExcel } = require("./diceAlgo");
 
 console.log('App start')
 
@@ -17,22 +18,30 @@ const printDistance = (str1, str2, distance) => {
 }
 
 
-function compare(arr, disimilarityCoffecient = 5) {
+function compare(arr, disimilarityCoffecient) {
     console.log("reaching")
     var removalCounter = 0;
+    const result = [];
 
     for (var i = 0; i < arr.length; i++) {
         for (var j = 0; j < arr.length; j++) {
             if (i !== j) {
-                const distance = levenshtein(arr[i], arr[j])
+                let distance;
+                try {
+                    distance = levenshtein(arr[i], arr[j])
+                }
+                catch (e) { }
                 if (distance <= disimilarityCoffecient) {
                     arr.splice(j, 1)
                     removalCounter++
-                    printDistance(arr[i], arr[j], distance)
+                    result.push({ str1: arr[i], str2: arr[j], distance })
+                    // printDistance(arr[i], arr[j], distance)
                 }
             }
         }
     }
+    writeToExcel(result);
+
     console.log('removalCounter: ', removalCounter)
 
 }

@@ -1,17 +1,16 @@
 const { start: pullQuotesFromAZQuotes } = require("./azquotes/app");
 const { start: combineOutputs } = require("./combine-output/app");
-const { start: copyFilesIntoInputFolder } = require("./string-similarity/app");
+const { start: removeDuplicateQuotes } = require("./string-similarity/app");
 const { start: pullQuotesFromGoodreads } = require("./goodreads/app");
-const { removeSimilarQuotes } = require("./string-similarity/utils/utils");
 
 (async function () {
     await pullQuotesFromAZQuotes();
     await pullQuotesFromGoodreads();
     console.log("Combining process started.")
     combineOutputs();
-    
-    copyFilesIntoInputFolder();
-    removeSimilarQuotes();
+
+    // copyFilesIntoInputFolder();
+    // removeDuplicateQuotes();
 })();
 
 

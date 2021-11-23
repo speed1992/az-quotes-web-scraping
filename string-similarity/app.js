@@ -1,13 +1,19 @@
 const { copyFilesIntoInputFolder, removeSimilarQuotes } = require("./utils/utils");
 
 function start() {
-    console.log("? Reaching SS app.js Line 4")
-
     console.log("String similarity process started.");
 
     copyFilesIntoInputFolder();
-    removeSimilarQuotes();
-
+    removeSimilarQuotes(0);
+    /*  
+    ***dissimilarity coefficient***
+    
+    Dice-Coeff : if it is one (1) 
+    then string is totally similar
+    
+    Levenstein : distance 0 - totally similar
+    
+*/
 
 }
 

@@ -3,6 +3,8 @@ const klawSync = require('klaw-sync')
 const through2 = require('through2')
 const path = require("path");
 const { compare } = require('./levAlgoUtils');
+// const { compare } = require('./diceAlgo');
+const { writeToFile } = require('../../common/utils/utils');
 
 let inputPath = "../../combine-output/output";
 
@@ -46,11 +48,12 @@ function copyFilesIntoInputFolder() {
 
 }
 
-function removeSimilarQuotes() {
+function removeSimilarQuotes(disimilarityCoffecient) {
     const fileNames = getAllFiles(outputPath);
 
     fileNames && fileNames.forEach((filePath, index, array) => {
         console.log("inside removeSimilarQuotes");
+        let fileName = path.basename(filePath, '.js');
         let quotes;
 
         let output = fse.readFileSync(filePath, "utf8", callback)
@@ -58,7 +61,9 @@ function removeSimilarQuotes() {
         if (output != undefined && output)
             quotes = parseOutput(output);
 
-        compare(quotes);
+        compare(quotes, disimilarityCoffecient);
+
+        writeToFile(quotes, { varName: fileName }, "string-similarity", true);
 
     })
 }
