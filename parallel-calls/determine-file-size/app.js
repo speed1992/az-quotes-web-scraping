@@ -1,11 +1,4 @@
-// const ufs = require("url-file-size");
-
-// ufs("https://dimden.dev/logo.png")
-//     .then(console.log) // 1416
-//     .catch(console.error);
-
 const request = require("request");
-
 
 function determineFileSize() {
     return new Promise((resolve, _) => {
