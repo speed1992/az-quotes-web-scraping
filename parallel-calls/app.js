@@ -1,7 +1,7 @@
 
 // input -> URL
 
-const { determineFileSize } = require("./determine-file-size/app");
+const { determineFileSize } = require("./modules/determine-file-size/app");
 const { getNetworkDownloadSpeed } = require("./determine-network-speed/app");
 
 // find file size by requesting and calculating the data size of the response
