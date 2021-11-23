@@ -20,29 +20,37 @@ function callback(err, data) {
 }
 
 function getAllFiles(dirPath) {
-    const result = klawSync(dirPath, { nodir: true })
+    let result;
+    try {
+        result = klawSync(dirPath, { nodir: true })
+    }
+    catch (e) {
+    }
 
-    return result.map((value) => {
+    return result && result.map((value) => {
         return value.path
     })
+
+
 }
 
 function copyFilesIntoInputFolder() {
+    console.log("? reaching here?")
     const fileNames = getAllFiles(inputPath);
-    fileNames.forEach((value) => {
-        fse.copy(value, `${outputPath}/${path.basename(value)}`)
+
+    fileNames.forEach(async (value, index, array) => {
+        await fse.copy(value, `${outputPath}/${path.basename(value)}`)
             .then(() => console.log(path.basename(value), 'copied!'))
             .catch(err => console.error(err))
     })
-
 
 }
 
 function removeSimilarQuotes() {
     const fileNames = getAllFiles(outputPath);
 
-    fileNames.forEach((filePath) => {
-        console.log(filePath)
+    fileNames && fileNames.forEach((filePath, index, array) => {
+        console.log("inside removeSimilarQuotes");
         let quotes;
 
         let output = fse.readFileSync(filePath, "utf8", callback)
@@ -53,7 +61,6 @@ function removeSimilarQuotes() {
         compare(quotes);
 
     })
-
 }
 
 module.exports.removeSimilarQuotes = removeSimilarQuotes;
