@@ -20,7 +20,7 @@ function readFileFromAllModules() {
     return new Promise(function (resolve, _) {
 
         for (let i = 0; i < PHILOSOPHERS_DATA.length; i++) {
-            const varName = PHILOSOPHERS_DATA[i].varName;
+            const varName = PHILOSOPHERS_DATA[i].varName.toLowerCase();
             let combinedOutput = [];
 
             for (let j = 0; j < modules.length; j++) {
@@ -36,7 +36,7 @@ function readFileFromAllModules() {
             writeToFile(combinedOutput, { varName }, "combine-output")
 
         }
-
+        resolve()
     });
 
 }
