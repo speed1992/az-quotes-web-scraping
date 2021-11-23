@@ -21,7 +21,7 @@ module.exports.PHILOSOPHERS_DATA = [
     },
     {
         goodreadsURL: "https://www.goodreads.com/author/quotes/850512.Jiddu_Krishnamurti",
-        varName: "KKRISHNAMURTI"
+        varName: "KRISHNAMURTI"
     },
     {
         goodreadsURL: "https://www.goodreads.com/author/quotes/282885.Jordan_B_Peterson",
