@@ -117,6 +117,99 @@ module.exports.PHILOSOPHERS_DATA = [
     {
         goodreadsURL: "https://www.goodreads.com/author/quotes/5589647.Marie_Kond_",
         varName: "MARIE_KONDO"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/17202-Rajneesh",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/2856822.Osho",
+        varName: "OSHO"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/15937-Virginia_Woolf",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/6765.Virginia_Woolf",
+        varName: "VIRGINIA_WOOLF"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/1105-Simone_de_Beauvoir",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/5548.Simone_de_Beauvoir",
+        varName: "BEAUVOIR"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/7659-Carl_Jung",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/38285.C_G_Jung",
+        varName: "CARL_JUNG"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/3592-Salvador_Dali",
+        goodreadsURL: "https: //www.goodreads.com/author/show/165858.Salvador_Dal_",
+        varName: "SALVADOR_DALI"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/5632-Vincent_Van_Gogh",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/34583.Vincent_van_Gogh",
+        varName: "VINCENT_VAN_GOGH"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/15362-Alan_Watts",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/1501668.Alan_W_Watts",
+        varName: "ALAN_WATTS"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/22138-Hippocrates",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/248774.Hippocrates",
+        varName: "HIPPOCRATES"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/8281-Jiddu_Krishnamurti",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/850512.Jiddu_Krishnamurti",
+        varName: "KKRISHNAMURTI"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/38823-Jordan_Peterson",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/282885.Jordan_B_Peterson",
+        varName: "PETERSON"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/5121-Viktor_E_Frankl",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/2782.Viktor_E_Frankl",
+        varName: "VICTOR_FRANKL"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/666-Marcus_Aurelius",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/17212.Marcus_Aurelius",
+        varName: "AURELIUS"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/19745-Robert_Greene",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/865.Robert_Greene",
+        varName: "ROBERT_GREENE"
+    },
+    {
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/6862186.Naval_Ravikant",
+        varName: "NAVAL_RAVIKANT"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/17640-Thomas_Ligotti",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/128466.Thomas_Ligotti",
+        varName: "LIGOTTI"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/19765-Seneca_the_Younger",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/4918776.Seneca",
+        varName: "SENECA"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/20579-Slavoj_i_ek",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/2340358.Slavoj_i_ek",
+        varName: "ZIZEK"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/1118-Samuel_Beckett",
+        goodreadsURL: "https: //www.goodreads.com/author/quotes/1433597.Samuel_Beckett",
+        varName: "BECKETT"
+    },
+    {
+        azQuotesURL: "https://www.azquotes.com/author/3659-Mahmoud_Darwish",
+        varName: "DARWISH"
     }
 ]
 
