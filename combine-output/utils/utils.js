@@ -24,10 +24,10 @@ function readFileFromAllModules() {
             let combinedOutput = [];
 
             for (let j = 0; j < modules.length; j++) {
-
+                let output;
                 const inputPath = `../../${modules[j]}/output/${varName}.js`
                 try {
-                    let output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
+                    output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
                 } catch (e) { }
                 if (typeof output != undefined && output)
                     combinedOutput = [...combinedOutput, ...(parseOutput(output))];
