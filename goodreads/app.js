@@ -24,7 +24,7 @@ module.exports.start = function () {
 
         writeToFile(quotesCollection, { philosopherNameInSelector, varName: PHILOSOPHERS_DATA[j].varName }, MODULE_NAME);
       }
-      resolve();
+      if (j === PHILOSOPHERS_DATA.length - 1) resolve();
     }
   });
 };

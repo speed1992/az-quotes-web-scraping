@@ -4,7 +4,7 @@ const { STATIC_SUBSTRING1, STATIC_SUBSTRING2 } = require('../../common/constants
 
 module.exports.requestURL = (url, philosopherNameInSelector) => {
     return new Promise((resolve, reject) => {
-
+        url = url.trim();
         request(url, function (error, response, html) {
             if (error) {
                 console.log(error);

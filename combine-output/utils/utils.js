@@ -20,14 +20,15 @@ function readFileFromAllModules() {
     return new Promise(function (resolve, _) {
 
         for (let i = 0; i < PHILOSOPHERS_DATA.length; i++) {
-            const varName = PHILOSOPHERS_DATA[i].varName;
+            const varName = PHILOSOPHERS_DATA[i].varName.toLowerCase();
             let combinedOutput = [];
 
             for (let j = 0; j < modules.length; j++) {
-
+                let output;
                 const inputPath = `../../${modules[j]}/output/${varName}.js`
-                let output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
-
+                try {
+                    output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
+                } catch (e) { }
                 if (typeof output != undefined && output)
                     combinedOutput = [...combinedOutput, ...(parseOutput(output))];
 
@@ -36,7 +37,7 @@ function readFileFromAllModules() {
             writeToFile(combinedOutput, { varName }, "combine-output")
 
         }
-
+        resolve()
     });
 
 }
