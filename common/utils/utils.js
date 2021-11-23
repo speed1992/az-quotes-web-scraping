@@ -3,7 +3,7 @@ const { STATIC_SUBSTRING1, STATIC_SUBSTRING2 } = require("../constants/constants
 
 const writeToFile = (json, { philosopherNameInSelector = null, varName }, MODULE_NAME, customContentToggle) => {
 
-    const philosopher = `${varName}.js`
+    const philosopher = `${varName.toLowerCase()}.js`
     const outputPath = `${MODULE_NAME}/output/${philosopher}`
 
     let content;

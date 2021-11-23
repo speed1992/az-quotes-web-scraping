@@ -10,15 +10,15 @@ module.exports.start = function () {
     console.log('AZ-Quotes App started');
 
     for (j = 0; j < PHILOSOPHERS_DATA.length; j++) {
-      if (PHILOSOPHERS_DATA[j].azQuotesUrl && PHILOSOPHERS_DATA[j].azQuotesUrl != "" && typeof PHILOSOPHERS_DATA[j].azQuotesUrl !== undefined) {
+      if (PHILOSOPHERS_DATA[j].azQuotesURL && PHILOSOPHERS_DATA[j].azQuotesURL != "" && typeof PHILOSOPHERS_DATA[j].azQuotesURL !== undefined) {
 
         let quotesCollection = []
 
-        let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].azQuotesUrl);
+        let { lastPage, philosopherNameInSelector } = await findOutLastPage(PHILOSOPHERS_DATA[j].azQuotesURL);
 
         for (i = 1; i <= lastPage; i++) {
           console.log("Page No.", i);
-          const urlWithPageNumber = PHILOSOPHERS_DATA[j].azQuotesUrl + "?p=" + i
+          const urlWithPageNumber = PHILOSOPHERS_DATA[j].azQuotesURL + "?p=" + i
           const json = await requestURL(urlWithPageNumber, philosopherNameInSelector);
           quotesCollection = [...quotesCollection, ...json]
         }
