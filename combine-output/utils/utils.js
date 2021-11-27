@@ -28,13 +28,15 @@ function readFileFromAllModules() {
                 const inputPath = `../../${modules[j]}/output/${varName}.js`
                 try {
                     output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
-                } catch (e) { }
-                if (typeof output != undefined && output)
-                    combinedOutput = [...combinedOutput, ...(parseOutput(output))];
+                    if (typeof output != undefined && output)
+                        combinedOutput = [...combinedOutput, ...(parseOutput(output))];
+                } catch (e) {
+                    console.log(e)
+                }
 
             }
 
-            writeToFile(combinedOutput, { varName }, "combine-output")
+            writeToFile(combinedOutput, { varName }, "combine-output", true)
 
         }
         resolve()
