@@ -1,8 +1,8 @@
 module.exports.PHILOSOPHERS_DATA = [
     {
-        azQuotesURL: "https://www.azquotes.com/author/12791-Bertrand_Russell",
-        goodreadsURL: "https://www.goodreads.com/author/quotes/17854.Bertrand_Russell",
-        varName: "RUSSELL"
+        azQuotesURL: "https://www.azquotes.com/author/18869-Nassim_Nicholas_Taleb",
+        goodreadsURL: "https://www.goodreads.com/author/quotes/21559.Nassim_Nicholas_Taleb",
+        varName: "NASSIM_TALEB"
     }
 ]
 

@@ -15,4 +15,3 @@ npm-debug.log
 node_modules
 output*
 input*
-common/constants/constants.js
