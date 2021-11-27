@@ -8,7 +8,7 @@ const writeToFile = (json, { philosopherNameInSelector = null, varName }, MODULE
 
     let content;
     if (customContentToggle)
-        content = `${STATIC_SUBSTRING1}${varName}${STATIC_SUBSTRING2}${JSON.stringify(json, null, 4)}`
+        content = `${STATIC_SUBSTRING1}${varName.toUpperCase()}${STATIC_SUBSTRING2}${JSON.stringify(json, null, 4)}`
     else
         content = `${JSON.stringify(json, null, 4)}`
 
