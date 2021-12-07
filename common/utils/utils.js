@@ -1,9 +1,9 @@
 var fse = require('fs-extra');
 const { STATIC_SUBSTRING1, STATIC_SUBSTRING2 } = require("../constants/constants")
 
-const writeToFile = (json, { philosopherNameInSelector = null, varName }, MODULE_NAME, customContentToggle) => {
+const writeToFile = (json, { philosopherNameInSelector = null, varName }, MODULE_NAME, customContentToggle = false) => {
 
-    const philosopher = `${varName.toLowerCase()}.js`
+    const philosopher = `${varName.toLowerCase()}.json`
     const outputPath = `${MODULE_NAME}/output/${philosopher}`
 
     let content;

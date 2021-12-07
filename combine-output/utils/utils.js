@@ -25,7 +25,7 @@ function readFileFromAllModules() {
 
             for (let j = 0; j < modules.length; j++) {
                 let output;
-                const inputPath = `../../${modules[j]}/output/${varName}.js`
+                const inputPath = `../../${modules[j]}/output/${varName}.json`
                 try {
                     output = fse.readFileSync(path.resolve(__dirname, inputPath), "utf8", callback)
                     if (typeof output != undefined && output)
@@ -36,7 +36,7 @@ function readFileFromAllModules() {
 
             }
 
-            writeToFile(combinedOutput, { varName }, "combine-output", true)
+            writeToFile(combinedOutput, { varName }, "combine-output")
 
         }
         resolve()
