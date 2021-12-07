@@ -53,7 +53,7 @@ function removeSimilarQuotes(disimilarityCoffecient) {
 
     fileNames && fileNames.forEach((filePath, index, array) => {
         console.log("inside removeSimilarQuotes");
-        let fileName = path.basename(filePath, '.js');
+        let fileName = path.basename(filePath, '.json');
         let quotes;
 
         let output = fse.readFileSync(filePath, "utf8", callback)
