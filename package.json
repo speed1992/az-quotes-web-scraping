@@ -11,7 +11,7 @@
     "network-speed": "^2.0.4",
     "request": "latest",
     "string-similarity": "^4.0.4",
-    "through2": "^4.0.2",
-    "url-file-size": "^1.0.0"
+    "url-file-size": "^1.0.0",
+    "walk": "^2.3.15"
   }
 }
