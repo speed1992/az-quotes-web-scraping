@@ -1,6 +1,5 @@
 const fse = require('fs-extra')
 const klawSync = require('klaw-sync')
-const through2 = require('through2')
 const path = require("path");
 const { compare } = require('./levAlgoUtils');
 // const { compare } = require('./diceAlgo');
