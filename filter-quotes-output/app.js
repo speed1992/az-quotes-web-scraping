@@ -1,6 +1,10 @@
 // Remove all urdu quotes
 // Remove all single words
 // Remove spanish quotes
+// remove empty quotes
+// remove punctuation, then compare
+// remove undefined quotes
+
 var path = require('path');
 var walk = require('walk');
 var fse = require('fs-extra');
