@@ -3,16 +3,34 @@
 // Remove spanish quotes
 var path = require('path');
 var walk = require('walk');
-var fs = require('fs');
+var fse = require('fs-extra');
+const { removeDuplicateQuotes } = require('./utils/utils');
 const inputDirPath = path.resolve("../combine-output/output")
+const outputDirPath = path.resolve("./output")
 
 const walker = walk.walk(inputDirPath);
 
 walker.on('file', function (root, fileStats, next) {
-    fs.readFile(inputDirPath + "/" + fileStats.name, 'utf8', function (err, data) {
+    fse.readFile(inputDirPath + "/" + fileStats.name, 'utf8', function (err, data) {
         if (err) throw err;
-        obj = JSON.parse(data);
-        console.log(obj[0])
+        arr = JSON.parse(data);
+        if (arr[0] === undefined) {
+            console.log(Array.isArray(arr))
+            console.log(arr[0], arr[1], arr[2])
+            console.log(arr)
+        }
+
+        const uniq = [...new Set(arr)];
+
+        fse.outputFile(outputDirPath + "/" + fileStats.name, JSON.stringify(uniq), (err) => {
+            if (err)
+                console.log(err);
+            else {
+                console.log(fileStats.name, " file written successfully");
+            }
+        });
+
+
         next()
     });
 });
