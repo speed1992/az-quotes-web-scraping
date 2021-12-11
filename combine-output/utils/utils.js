@@ -35,7 +35,7 @@ function readFileFromAllModules() {
                 }
 
             }
-
+            combinedOutput = [...new Set(combinedOutput)]
             writeToFile(combinedOutput, { varName }, "combine-output")
 
         }
