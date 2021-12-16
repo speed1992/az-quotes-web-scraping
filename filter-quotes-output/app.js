@@ -1,8 +1,10 @@
+// remove puncuation from constant filters
 // Remove all urdu quotes
 // Remove all single words
 // Remove spanish quotes
 // remove empty quotes
-// remove punctuation, then compare
+// remove one word quotes
+// remove punctuation, toLowercase, trim() then compare and remove duplicates
 // remove undefined quotes
 
 var path = require('path');

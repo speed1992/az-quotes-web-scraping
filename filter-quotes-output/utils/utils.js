@@ -13,3 +13,5 @@ function performCleanUp() {
 
     console.log("FILTERS after split", newFilters)
 }
+
+performCleanUp()
