@@ -2,6 +2,7 @@
 // Remove all urdu quotes
 // Remove all single words
 // Remove spanish quotes
+// Remove Russian quotes
 // remove empty quotes
 // remove one word quotes
 // remove punctuation, toLowercase, trim() then compare and remove duplicates
