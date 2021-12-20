@@ -9,7 +9,6 @@
     "json2xls": "^0.1.2",
     "klaw-sync": "^6.0.0",
     "network-speed": "^2.0.4",
-    "node-json-minify": "^2.0.0",
     "request": "latest",
     "string-similarity": "^4.0.4",
     "url-file-size": "^1.0.0",
