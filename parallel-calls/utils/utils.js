@@ -25,4 +25,7 @@ export function retry(fn, n) {
     return promise;
 }
 
+export const retryInfinite = (fn) => retry(fn, 10000000000)
+
 module.exports.getConcurrencyLimit = getConcurrencyLimit
+module.exports.retry = retryInfinite
