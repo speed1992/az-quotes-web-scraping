@@ -12,6 +12,8 @@ var path = require('path');
 var walk = require('walk');
 var fse = require('fs-extra');
 const { removeDuplicateQuotes } = require('./utils/utils');
+const { filterQuotes } = require('./utils/filterUtils');
+const { splitFilters } = require('./utils/utils');
 const inputDirPath = path.resolve("../combine-output/output")
 const outputDirPath = path.resolve("./output")
 
@@ -20,16 +22,15 @@ const walker = walk.walk(inputDirPath);
 walker.on('file', function (root, fileStats, next) {
     fse.readFile(inputDirPath + "/" + fileStats.name, 'utf8', function (err, data) {
         if (err) throw err;
-        arr = JSON.parse(data);
-        if (arr[0] === undefined) {
-            console.log(Array.isArray(arr))
-            console.log(arr[0], arr[1], arr[2])
-            console.log(arr)
+        quotes = JSON.parse(data);
+        let filteredQuotes = []
+        if (quotes !== undefined) {
+            const filters = splitFilters();
+            filteredQuotes = filterQuotes(quotes,filters,fileStats.name)
         }
 
-        const uniq = [...new Set(arr)];
 
-        fse.outputFile(outputDirPath + "/" + fileStats.name, JSON.stringify(uniq), (err) => {
+        fse.outputFile(outputDirPath + "/" + fileStats.name, JSON.stringify(filteredQuotes), (err) => {
             if (err)
                 console.log(err);
             else {
