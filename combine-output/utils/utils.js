@@ -35,6 +35,8 @@ function readFileFromAllModules() {
                 }
 
             }
+
+            // remove duplicate quotes
             combinedOutput = [...new Set(combinedOutput)]
             writeToFile(combinedOutput, { varName }, "combine-output")
 
