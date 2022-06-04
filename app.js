@@ -10,9 +10,6 @@ const { deleteOutputDirectories } = require("./delete-clear-outputs/app");
     await pullQuotesFromGoodreads();
     console.log("Combining process started.")
     combineOutputs();
-
-    // copyFilesIntoInputFolder();
-    // removeDuplicateQuotes();
 })();
 
 
