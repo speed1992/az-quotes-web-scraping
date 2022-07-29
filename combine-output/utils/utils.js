@@ -17,6 +17,7 @@ function callback(err, data) {
 const parseOutput = (data) => JSON.parse(data);
 
 function readFileFromAllModules() {
+    console.log("Combining process started.")
     return new Promise(function (resolve, _) {
 
         for (let i = 0; i < PHILOSOPHERS_DATA.length; i++) {
