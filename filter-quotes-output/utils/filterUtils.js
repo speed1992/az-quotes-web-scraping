@@ -1,8 +1,8 @@
-var filterArray = ["व"];
-var myQuotes = ["Nietzsche", "स्लैवज", "SSchopenhauer"]
+const json2xls = require('json2xls');
+var path = require('path');
+const fse = require('fs-extra');
 
 var reportLog = [];
-
 
 var splitFilterArrayFurther = (arr) => {
     var result = [];
@@ -26,18 +26,18 @@ var filteringLogic = (quote, filterString) => {
 }
 
 
-const filterQuotes = (myQuotes, filterArray) => {
+module.exports.filterQuotes = (myQuotes, filterArray,fileName) => {
     filterArray = splitFilterArrayFurther(filterArray);
     var filteredQuotes = [];
 
     filterArray.forEach((filterStr) => {
         filteredQuotes = myQuotes.filter((quote) => filteringLogic(quote, filterStr));
     });
-    return refinedQuotes;
+
+    var xls = json2xls(reportLog);
+    fse.writeFileSync(path.resolve(`output/reports/${fileName}.xlsx`), xls, 'binary');
+    reportLog = [];
+    return filteredQuotes;
 }
 
 
-
-console.log(filterQuotes(myQuotes, filterArray))
-
-// XlsX(reportLog)
