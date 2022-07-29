@@ -5,11 +5,11 @@ const { deleteOutputDirectories } = require("./delete-clear-outputs/app");
 const { start: makeConstantsFileForQuotesRepo } = require("./convert-constants-json/app");
 
 (async function () {
-    await deleteOutputDirectories(["azquotes", "goodreads", "combine-output"])
+    await deleteOutputDirectories(["azquotes", "goodreads", "combine-output", "convert-constants-json"])
     await pullQuotesFromAZQuotes();
     await pullQuotesFromGoodreads();
     combineOutputs();
-    makeConstantsFileForQuotesRepo();
+    await makeConstantsFileForQuotesRepo();
 })();
 
 function errorHandler(error) {

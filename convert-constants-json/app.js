@@ -1,6 +1,6 @@
 const { PHILOSOPHERS_DATA } = require('../common/constants/constants');
 const { writeToFile } = require('../common/utils/utils');
-const { capitalize } = require('./utils/utils');
+const { findOutPhilosopherName, hitTranslationAPI } = require('./utils/utils');
 
 let obj = {
         value: "",
@@ -10,35 +10,28 @@ let obj = {
         }
 };
 
-module.exports.getConvertedObject = function (philosopherInfo) {
-        var newObj = { ...obj };
+
+async function getConvertedObject(philosopherInfo) {
+        let newObj = { ...obj };
         newObj.value = philosopherInfo.varName;
-        newObj.fullName = capitalize(philosopherInfo.varName);
-
-        console.log(newObj)
-
-        return newObj;
-
+        newObj.fullName = await findOutPhilosopherName(philosopherInfo.goodreadsURL);
+        const translatedText = await hitTranslationAPI({ inputText: newObj.fullName })
+        newObj.fullNameInOtherLanguages = { hi: translatedText };
+        return { ...newObj };
 };
 
-module.exports.convert = function () {
+async function convert() {
+        let result = [];
 
-        var result = [];
-
-        for (var i = 0; i < PHILOSOPHERS_DATA.length; i++) {
-                let newObj = this.getConvertedObject(PHILOSOPHERS_DATA[i]);
-
+        for (let i = 0; i < PHILOSOPHERS_DATA.length; i++) {
+                let newObj = await getConvertedObject(PHILOSOPHERS_DATA[i]);
                 result.push(newObj);
-
         }
         return result;
 }
 
 module.exports.start = async function () {
-
-        let result = this.convert();
-
-        console.log(result);
+        let result = await convert();
 
         writeToFile(result, { varName: "CONVERTED_CONSTANTS" }, "./");
 

@@ -1,4 +1,6 @@
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
+const request = require('request');
+var cheerio = require('cheerio');
 
 module.exports.capitalize = function (input) {
     input = input.toLowerCase();
@@ -10,7 +12,7 @@ module.exports.capitalize = function (input) {
     return CapitalizedWords.join(' ');
 }
 
-module.exports.hitTranslationAPI = async function ({ from, to, inputText }) {
+module.exports.hitTranslationAPI = async function ({ from = "en", to = "hi", inputText }) {
 
     const response = await fetch("https://translate.argosopentech.com/translate", {
         method: "POST",
@@ -19,6 +21,23 @@ module.exports.hitTranslationAPI = async function ({ from, to, inputText }) {
     }).catch((e) => { })
 
     const { translatedText } = await response.json();
+    console.log(translatedText)
 
     return translatedText;
+}
+
+module.exports.findOutPhilosopherName = (url) => {
+    return new Promise((resolve, reject) => {
+        request(url, function (error, response, html) {
+            if (!error) {
+                var $ = cheerio.load(html);
+
+                const philosopherNameInSelector = $('.leftContainer h1 > a:nth-child(2)').text().trim()
+                console.log(philosopherNameInSelector);
+
+                resolve(philosopherNameInSelector);
+            }
+
+        })
+    });
 }
