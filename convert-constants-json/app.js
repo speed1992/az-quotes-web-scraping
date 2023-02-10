@@ -33,6 +33,6 @@ async function convert() {
 module.exports.start = async function () {
         let result = await convert();
 
-        writeToFile(result, { varName: "CONVERTED_CONSTANTS" }, "./");
+        writeToFile(result, { varName: "CONVERTED_CONSTANTS" }, "convert-constants-json");
 
 };
