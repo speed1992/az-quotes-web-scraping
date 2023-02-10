@@ -1,7 +1,7 @@
 const { determineFileSize } = require("./modules/determine-file-size/app");
 const { getNetworkDownloadSpeed } = require("./determine-network-speed/app");
 
-function getConcurrencyLimit() {
+async function getConcurrencyLimit() {
     const { bps: networkSpeed } = await getNetworkDownloadSpeed();
     const fileSize = await determineFileSize();
 
@@ -13,7 +13,7 @@ function getConcurrencyLimit() {
 
 }
 
-export function retry(fn, n) {
+function retry(fn, n) {
     let promise;
     for (let i = 0; i < n; i++) {
         if (!promise) promise = fn();
@@ -25,7 +25,7 @@ export function retry(fn, n) {
     return promise;
 }
 
-export const retryInfinite = (fn) => retry(fn, 10000000000)
+const retryInfinite = (fn) => retry(fn, 10000000000)
 
 module.exports.getConcurrencyLimit = getConcurrencyLimit
 module.exports.retry = retryInfinite
