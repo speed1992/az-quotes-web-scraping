@@ -18,7 +18,7 @@ function splitFilters() {
   return newFilters;
 }
 
-function removeFilters(filename, inputDirPath) {
+async function removeFilters(filename, inputDirPath) {
   fse.readFile(inputDirPath + "/" + filename, "utf8", function (err, data) {
     if (err) throw err;
     quotes = JSON.parse(data);
@@ -29,7 +29,7 @@ function removeFilters(filename, inputDirPath) {
       filteredQuotes = filterQuotes(quotes, filters, filename);
     }
 
-    fse.outputFile(
+    fse.outputFileSync(
       outputDirPath + "/" + filename,
       JSON.stringify(filteredQuotes),
       (err) => {

@@ -37,13 +37,13 @@ module.exports.filterQuotes = (myQuotes, filterArray, fileName) => {
   });
 
   var xls = json2xls(reportLog);
-  fse.outputFileSync(
-    path.resolve(
-      `filter-quotes-output/output/reports/${path.parse(fileName).name}.xlsx`
-    ),
-    xls,
-    "binary"
-  );
+  // fse.outputFileSync(
+  //   path.resolve(
+  //     `filter-quotes-output/output/reports/${path.parse(fileName).name}.xlsx`
+  //   ),
+  //   xls,
+  //   "binary"
+  // );
   reportLog = [];
   return filteredQuotes;
 };
