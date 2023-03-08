@@ -1,45 +1,74 @@
 var path = require("path");
-var walk = require("walk");
+const json2xls = require("json2xls");
 var fse = require("fs-extra");
-var Walk = require("@root/walk");
-const { filterQuotes } = require("./filterUtils");
-const inputDirPath = path.resolve("../../add-ids-to-outputs/output");
-const outputDirPath = path.resolve("filter-quotes-output/output");
 const { FILTERS } = require("../constants/constants");
+const outputDirPath = path.resolve("filter-quotes-output/output");
 
-function splitFilters() {
-  let newFilters = [];
+let reportLog = [];
 
-  FILTERS.languageFilters.forEach((filterSentence, index) => {
-    const filtersAfterSplit = filterSentence.replace(/\s/g, "").split("");
-    newFilters = [...newFilters, ...filtersAfterSplit];
-  });
+function isFilterPresentInQuote(quoteObj, filterString) {
+  var quote = quoteObj.quote;
 
-  return newFilters;
+  // if (quote.split(" ").length < 2) return true;
+
+  if (quote.indexOf(filterString) > -1) {
+    reportLog.push({ quote, filterString });
+    return true;
+  }
+  return false;
 }
 
-async function removeFilters(filename, inputDirPath) {
-  fse.readFile(inputDirPath + "/" + filename, "utf8", function (err, data) {
-    if (err) throw err;
-    quotes = JSON.parse(data);
-    let filteredQuotes = [];
-    if (quotes !== undefined) {
-      console.log(filename);
-      const filters = splitFilters();
-      filteredQuotes = filterQuotes(quotes, filters, filename);
-    }
+function filterQuotes(myQuotes, filterArray, fileName) {
+  var filteredQuotes = [];
+  let filterFound = false;
 
-    fse.outputFileSync(
-      outputDirPath + "/" + filename,
-      JSON.stringify(filteredQuotes),
-      (err) => {
-        if (err) console.log(err);
-        else {
-          console.log(filename, " file written successfully");
-        }
+  loop1: for (let i = 0; i < myQuotes.length; i++) {
+    filterFound = false;
+    loop2: for (let j = 0; j < filterArray.length; j++) {
+      if (isFilterPresentInQuote(myQuotes[i], filterArray[j])) {
+        filterFound = true;
+        break loop2;
       }
-    );
-  });
+    }
+    if (!filterFound) filteredQuotes.push(myQuotes[i]);
+  }
+  var xls = json2xls(reportLog);
+  fse.outputFileSync(
+    path.resolve(
+      `filter-quotes-output/output/reports/${path.parse(fileName).name}.xlsx`
+    ),
+    xls,
+    "binary"
+  );
+  reportLog = [];
+  return filteredQuotes;
+}
+
+function removeFilters(filename, inputDirPath) {
+  fse.readFile(
+    inputDirPath + "/" + filename,
+    "utf8",
+    async function (err, data) {
+      if (err) throw err;
+      quotes = JSON.parse(data);
+      let filteredQuotes = [];
+      if (quotes !== undefined) {
+        const filters = FILTERS.languageFilters;
+        filteredQuotes = filterQuotes(quotes, filters, filename);
+      }
+
+      fse.outputFile(
+        outputDirPath + "/" + filename,
+        JSON.stringify(filteredQuotes),
+        (err) => {
+          if (err) console.log(err);
+          else {
+            console.log(filename, " file written successfully");
+          }
+        }
+      );
+    }
+  );
 }
 
 module.exports.walkFunc = function (err, pathname, dirent) {

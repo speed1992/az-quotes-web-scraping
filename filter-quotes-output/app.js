@@ -11,10 +11,8 @@
 var path = require("path");
 var Walk = require("@root/walk");
 const { walkFunc } = require("./utils/utils");
-const { FILTERS } = require("./constants/constants");
-const inputDirPath = path.resolve("add-ids-to-outputs/output");
+const inputDirPath = path.resolve("add-ids-to-outputs/output/");
 
 module.exports.start = async function () {
-  console.log("FILTERS before split", FILTERS);
   await Walk.walk(inputDirPath, walkFunc);
 };
