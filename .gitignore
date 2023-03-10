@@ -16,4 +16,4 @@ node_modules
 output*
 input*
 
-*common/constants/constants.js
+common/constants/**
