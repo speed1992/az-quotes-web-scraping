@@ -14,5 +14,7 @@ const { walkFunc } = require("./utils/utils");
 const inputDirPath = path.resolve("add-ids-to-outputs/output/");
 
 module.exports.start = async function () {
-  await Walk.walk(inputDirPath, walkFunc);
+  return new Promise(async (resolve, reject) => {
+    await Walk.walk(inputDirPath, walkFunc);
+  });
 };

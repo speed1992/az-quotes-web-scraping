@@ -13,22 +13,24 @@ const {
 } = require("./filter-quotes-output/app");
 
 (async function () {
-  await deleteOutputDirectories([
-    "azquotes",
-    "goodreads",
-    "combine-output",
-    "convert-constants-json",
-    "add-ids-to-outputs",
-    "filter-quotes-output",
-  ]);
+  try {
+  } catch (error) {
+    await deleteOutputDirectories([
+      "azquotes",
+      "goodreads",
+      "combine-output",
+      "convert-constants-json",
+      "add-ids-to-outputs",
+      "filter-quotes-output",
+    ]);
+  }
+
   await pullQuotesFromAZQuotes();
   await pullQuotesFromGoodreads();
   await combineOutputs();
   await makeConstantsFileForQuotesRepo();
   await addIdsToTheCombinedOutput();
-  setTimeout(async () => {
-    await filterSanitizeQuotations();
-  }, 2000);
+  await filterSanitizeQuotations();
 
   console.log(`Two outputs generated:
     1. convert-constants-json/output/converted_constants.json
