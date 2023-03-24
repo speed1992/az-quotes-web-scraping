@@ -2,7 +2,7 @@ var path = require("path");
 const json2xls = require("json2xls");
 var fse = require("fs-extra");
 const { FILTERS } = require("../constants/constants");
-const outputDirPath = path.resolve("filter-quotes-output/output");
+const outputDirPath = path.resolve("filter-quotes/output");
 
 let reportLog = [];
 
@@ -35,7 +35,7 @@ function filterQuotes(myQuotes, filterArray, fileName) {
   var xls = json2xls(reportLog);
   fse.outputFileSync(
     path.resolve(
-      `filter-quotes-output/output/reports/${path.parse(fileName).name}.xlsx`
+      `filter-quotes/output/reports/${path.parse(fileName).name}.xlsx`
     ),
     xls,
     "binary"

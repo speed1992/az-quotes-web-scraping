@@ -8,9 +8,7 @@ const {
 const {
   start: addIdsToTheCombinedOutput,
 } = require("./add-ids-to-outputs/app");
-const {
-  start: filterSanitizeQuotations,
-} = require("./filter-quotes-output/app");
+const { start: filterSanitizeQuotations } = require("./filter-quotes/app");
 
 (async function () {
   try {
@@ -21,7 +19,7 @@ const {
       "combine-output",
       "convert-constants-json",
       "add-ids-to-outputs",
-      "filter-quotes-output",
+      "filter-quotes",
     ]);
   }
 
@@ -34,7 +32,7 @@ const {
 
   console.log(`Two outputs generated:
     1. convert-constants-json/output/converted_constants.json
-    2. filter-quotes-output/output`);
+    2. filter-quotes/output`);
 })();
 
 function errorHandler(error) {
