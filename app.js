@@ -12,7 +12,6 @@ const { start: filterSanitizeQuotations } = require("./filter-quotes/app");
 
 (async function () {
   try {
-  } catch (error) {
     await deleteOutputDirectories([
       "azquotes",
       "goodreads",
@@ -21,6 +20,8 @@ const { start: filterSanitizeQuotations } = require("./filter-quotes/app");
       "add-ids-to-outputs",
       "filter-quotes",
     ]);
+  } catch (error) {
+    console.log(error);
   }
 
   await pullQuotesFromAZQuotes();
