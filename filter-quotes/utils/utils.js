@@ -2,14 +2,13 @@ var path = require("path");
 const json2xls = require("json2xls");
 var fse = require("fs-extra");
 const { FILTERS } = require("../constants/constants");
+const { removeSimilarQuotes } = require("./compareUtils");
 const outputDirPath = path.resolve("filter-quotes/output");
 
 let reportLog = [];
 
 function isFilterPresentInQuote(quoteObj, filterString) {
   var quote = quoteObj.quote;
-
-  // if (quote.split(" ").length < 2) return true;
 
   if (quote.indexOf(filterString) > -1) {
     reportLog.push({ quote, filterString });
@@ -32,6 +31,7 @@ function filterQuotes(myQuotes, filterArray, fileName) {
     }
     if (!filterFound) filteredQuotes.push(myQuotes[i]);
   }
+  console.log(reportLog.length, "quotes filtered");
   var xls = json2xls(reportLog);
   fse.outputFileSync(
     path.resolve(
@@ -54,7 +54,9 @@ function removeFilters(filename, inputDirPath) {
       let filteredQuotes = [];
       if (quotes !== undefined) {
         const filters = FILTERS.languageFilters;
+        console.log(quotes.length, "quotes found in", filename);
         filteredQuotes = filterQuotes(quotes, filters, filename);
+        filteredQuotes = removeSimilarQuotes(filteredQuotes, filename);
       }
 
       fse.outputFile(
@@ -63,7 +65,7 @@ function removeFilters(filename, inputDirPath) {
         (err) => {
           if (err) console.log(err);
           else {
-            console.log(filename, " file written successfully");
+            console.log(filename, "file written successfully");
           }
         }
       );
