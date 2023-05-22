@@ -29,7 +29,9 @@ const { start: filterSanitizeQuotations } = require("./filter-quotes/app");
   await combineOutputs();
   await makeConstantsFileForQuotesRepo();
   await addIdsToTheCombinedOutput();
-  await filterSanitizeQuotations();
+  setTimeout(async () => {
+    await filterSanitizeQuotations();
+  }, 2000);
 
   console.log(`Two outputs generated:
     1. convert-constants-json/output/converted_constants.json

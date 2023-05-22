@@ -1,8 +1,10 @@
 module.exports.PHILOSOPHERS_DATA = [
   {
-    azQuotesURL: "https://www.azquotes.com/author/12074-Ayn_Rand",
-    goodreadsURL: "https://www.goodreads.com/author/quotes/432.Ayn_Rand",
-    varName: "AYN_RAND",
+    azQuotesURL:
+      "https://www.azquotes.com/author/17650-Sri_Nisargadatta_Maharaj",
+    goodreadsURL:
+      "https://www.goodreads.com/author/quotes/172897.Nisargadatta_Maharaj",
+    varName: "NISARGADATTA",
   },
 ];
 
